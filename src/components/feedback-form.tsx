@@ -41,8 +41,8 @@ export default function FeedbackForm() {
     const debounceTimer = setTimeout(() => {
       setLoading(true)
       const encodedEmail = btoa(email)
-      const backendUrl = `https://script.google.com/macros/s/AKfycbzmniJj43dF-jJa-bNbhr6m0Ns8VOEe8szGghJ0ZSObhVCfmGnRCt3JLTcckT9HRo0E/exec?email=${encodedEmail}`
-
+      const backendUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}?email=${encodedEmail}`
+      console.log(backendUrl)
       fetch(backendUrl)
         .then((response) => response.json())
         .then((data) => {
@@ -115,7 +115,7 @@ export default function FeedbackForm() {
     }
 
     try {
-      await fetch("https://script.google.com/macros/s/AKfycbzmniJj43dF-jJa-bNbhr6m0Ns8VOEe8szGghJ0ZSObhVCfmGnRCt3JLTcckT9HRo0E/exec", {
+      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -145,7 +145,7 @@ export default function FeedbackForm() {
   }
 
   return (
-    <div className="flex flex-col h-screen container mx-auto px-auto py-auto xl:py-6 max-w-2xl">
+    <div className="flex flex-col container mx-auto px-auto py-auto xl:py-6 max-w-2xl">
       <header className="flex-shrink-0">
         <div className="bg-cover bg-center h-48 xl:rounded-t-xl" 
              style={{ backgroundImage: "url('/Backdrop-4704_x_1344_-2.jpg')", backgroundSize: "cover" }}>
@@ -158,7 +158,7 @@ export default function FeedbackForm() {
         </div>
       </header>
 
-      <main className='flex-grow overflow-y-auto'>
+      <main className=''>
         <Card className="rounded-t-none">
         <CardHeader className="pb-2">
           <div className="space-y-2">
