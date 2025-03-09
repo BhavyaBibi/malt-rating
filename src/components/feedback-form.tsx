@@ -114,6 +114,7 @@ export default function FeedbackForm() {
       name: name,
     }
 
+    
     try {
       await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
         method: "POST",
